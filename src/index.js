@@ -46,32 +46,28 @@ const App = () => {
       return _link.link.includes(search.toLowerCase());
     });
   }
-  
-  return <>
-  <h1>The Great Linkerator</h1>
-  <Switch>
-    <Route path="/searchBar" render={()=> <SearchBar />} />
-    <Route path="/createLink" render={()=><CreateLinkForm linkList={linkList} setLinkList={setLinkList} addNewLink={addNewLink} history={history}/>}/>
-    <Redirect from="*" to="/"  />
-  </Switch>
+  // return <>
+  // <h1>The Great Linkerator</h1>
+  // <Switch>
+  //   <Route path="/searchBar" render={()=> <SearchBar />} />
+  //   <Route path="/createLink" render={()=><CreateLinkForm linkList={linkList} setLinkList={setLinkList} addNewLink={addNewLink} history={history}/>}/>
+  //   <Redirect from="*" to="/"  />
+  // </Switch>
 
-  </>
+  // </>
 
-  
-
-
-//   return <Switch>
-//     <Route path='/'>
-//       <h1>The Great Linkerator</h1>
-//       <SearchBar 
-//         search={search}
-//         setSearch={setSearch}
-//         setSearchOption={setSearchOption}
-//         searchOption={searchOption}/>
+  return <Switch>
+    <Route path='/'>
+      <h1>The Great Linkerator</h1>
+      <SearchBar 
+        search={search}
+        setSearch={setSearch}
+        setSearchOption={setSearchOption}
+        searchOption={searchOption}/>
       
-//     </Route>
-//   </Switch>
-// };
+    </Route>
+  </Switch>
+};
 
 ReactDOM.render(
   <Router>

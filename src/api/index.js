@@ -1,4 +1,4 @@
-const BASE_URL= "http://localhost:3001/api";
+
 
 async function fetchAPI(url, method="GET", sendData=null) {
     const fetchOptions = {
