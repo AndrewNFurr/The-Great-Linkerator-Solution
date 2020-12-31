@@ -64,7 +64,9 @@ const App = () => {
         setSearch={setSearch}
         setSearchOption={setSearchOption}
         searchOption={searchOption}/>
-      
+      <Links 
+        linkList={filteredLinks()}
+        setSearch={setSearch}/>
     </Route>
   </Switch>
 };

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { fetchAPI } from "../api";
+import  fetchAPI  from "../api";
 
 const BASE_URL= "http://localhost:3001/api";
 
@@ -32,8 +32,8 @@ const CreateLinkForm = (props) => {
         try {
           const newLink = await fetchAPI(`${BASE_URL}/links`, "POST", newLinkData);
 
-          addNewLink(newLink.link);
-          setLinkList(...linkList, newLink.link);
+          addNewLink(newLink);
+          setLinkList(...linkList, newLink);
           clearForm();
 
         } catch(error) {
