@@ -39,18 +39,12 @@ useEffect(() => {
 }, [])
 
 function filteredLinks() {
-  if (searchOption === 'Tags') {
-    return linkList.filter((_link) => {
-      return  _link.tags.find(tag => {
-        tag.tag === search;
-      })
-    })
-  } else {
+  
         return linkList.filter((_link) => {
           return _link.link.toLowerCase().includes(search.toLowerCase());
         })
         } 
-}
+
       
 
 
