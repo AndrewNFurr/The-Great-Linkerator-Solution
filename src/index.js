@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Link, useHistory, Switch, Redirect } from "react-router-dom";
@@ -5,9 +6,9 @@ import fetchAPI from './api';
 import CreateLinkForm from "./components/CreateLinkForm"
 import {
   SearchBar,
-  Links
+  Links,
+  LinkTable
 } from './components';
-
 
 
 
@@ -30,7 +31,7 @@ const App = () => {
         setLinkList(resp);
       })
       .catch(console.error);
-}, [])
+  }, []);
   
   useEffect(() => {
   fetchAPI('http://localhost:3001/api/tags')
@@ -46,6 +47,7 @@ const App = () => {
       return _link.link.includes(search.toLowerCase());
     });
   }
+
   
   return <>
   <h1>The Great Linkerator</h1>
@@ -68,14 +70,15 @@ const App = () => {
 //         setSearch={setSearch}
 //         setSearchOption={setSearchOption}
 //         searchOption={searchOption}/>
-      
+         //  <LinkTable />
 //     </Route>
 //   </Switch>
 // };
+
 
 ReactDOM.render(
   <Router>
     <App />
   </Router>,
-  document.getElementById("app")
+  document.getElementById('app')
 );
