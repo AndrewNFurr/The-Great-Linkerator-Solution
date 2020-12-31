@@ -12,7 +12,7 @@ async function createLink({newLink, comment, clickCount, tags=[]}) {
     const tagList = await createTags(tags);
   
     const _link =  await addTagsToLink(link.id, tagList);
-    console.log(_link)
+    
     return _link
   } catch (error) {
     throw error;

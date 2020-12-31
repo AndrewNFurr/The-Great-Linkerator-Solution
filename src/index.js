@@ -1,15 +1,14 @@
+
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
-import { 
-  BrowserRouter as Router,
-  Switch,
-  Route
- } from "react-router-dom";
+import { BrowserRouter as Router, Route, useHistory, Switch, Redirect } from "react-router-dom";
 import fetchAPI from './api';
-
 import {
   SearchBar,
-  Links
+  Links,
+  LinkTable,
+  Link,
+  CreateLinkForm 
 } from './components';
 
 
@@ -20,16 +19,22 @@ const App = () => {
   const [search, setSearch] = useState('');
   const [searchOption, setSearchOption] = useState('')
 
-useEffect(async () => {
+  function addNewLink(newLink) {
+    setLinkList([...linkList, newLink]);
+  }
+  
+  let history = useHistory();
+
+  useEffect(async () => {
     fetchAPI('http://localhost:3001/api/links')
       .then((resp) => {
         console.log(resp)
         setLinkList(resp);
       })
       .catch(console.error);
-}, [])
-
-useEffect(() => {
+  }, []);
+  
+  useEffect(async () => {
   fetchAPI('http://localhost:3001/api/tags')
     .then((data) => {
       console.log(data)
@@ -37,16 +42,21 @@ useEffect(() => {
     })
     .catch(console.error)
 }, [])
+ 
+  function filteredLinks() {
+    return linkList.filter((_link) => {
+      return _link.link.includes(search.toLowerCase());
+    });
+  }
+  // return <>
+  // <h1>The Great Linkerator</h1>
+  // <Switch>
+  //   <Route path="/searchBar" render={()=> <SearchBar />} />
+  //   <Route path="/createLink" render={()=><CreateLinkForm linkList={linkList} setLinkList={setLinkList} addNewLink={addNewLink} history={history}/>}/>
+  //   <Redirect from="*" to="/"  />
+  // </Switch>
 
-function filteredLinks() {
-  
-        return linkList.filter((_link) => {
-          return _link.link.toLowerCase().includes(search.toLowerCase());
-        })
-        } 
-
-      
-
+  // </>
 
   return <Switch>
     <Route path='/'>
@@ -56,16 +66,17 @@ function filteredLinks() {
         setSearch={setSearch}
         setSearchOption={setSearchOption}
         searchOption={searchOption}/>
-      <Links 
+      <LinkTable
         linkList={filteredLinks()}
-        tagList={tagList}/>
+        setSearch={setSearch}/>
     </Route>
   </Switch>
 };
+
 
 ReactDOM.render(
   <Router>
     <App />
   </Router>,
-  document.getElementById("app")
+  document.getElementById('app')
 );

@@ -1,6 +1,7 @@
 import React from 'react';
 import './SearchBar.css'
 
+
 const SearchBar = ({
     search,
     setSearch,
@@ -8,6 +9,7 @@ const SearchBar = ({
     setSearchOption
 }) => {
     return <div className='search-bar'>
+        <h1>Test2222</h1>
     <div id="search">
         <label htmlFor="keywords">Search by Term</label>
         <input 
@@ -37,3 +39,4 @@ const SearchBar = ({
 }
 
 export default SearchBar;
+
