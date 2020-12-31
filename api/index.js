@@ -31,7 +31,7 @@ apiRouter.get("/links", async (req, res, next) => {
     }
   });
 
-apiRouter.get('/tags', async (req, res) => {
+apiRouter.get('/tags', async (req, res, next) => {
   try {
     const tags = await getAllTags();
   

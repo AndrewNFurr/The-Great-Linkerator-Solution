@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 const Links = ({
     linkList,
-    setLinkList,
+    setSearch,
     tagList
 }) => {
     return <div>
@@ -18,15 +18,16 @@ const Links = ({
                 <th>Tags</th>
                 <th>Created</th>
             </tr>
-            
                 {
                     linkList.map(_link => {
                         return <tr>
-                                <td>{_link.link}</td>
+                                <td><a href={_link.link}>{_link.link}</a></td>
                                 <td>{_link.clickcount}</td>
                                 <td>{_link.comment}</td>
                                 <td>{_link.tags ? _link.tags.map(tag => {
-                                    return <p>{tag.tag}</p>
+                                    return <p onClick={() =>
+                                        setSearch(tag.tag)
+                                    }>{tag.tag}</p>
                                 }) : "None"}</td>
                                 <td>{_link.dateCreated}</td>
                              </tr>

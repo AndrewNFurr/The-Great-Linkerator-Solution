@@ -1,13 +1,14 @@
 
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter as Router, Route, Link, useHistory, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route, useHistory, Switch, Redirect } from "react-router-dom";
 import fetchAPI from './api';
-import CreateLinkForm from "./components/CreateLinkForm"
 import {
   SearchBar,
   Links,
-  LinkTable
+  LinkTable,
+  Link,
+  CreateLinkForm 
 } from './components';
 
 
@@ -33,7 +34,7 @@ const App = () => {
       .catch(console.error);
   }, []);
   
-  useEffect(() => {
+  useEffect(async () => {
   fetchAPI('http://localhost:3001/api/tags')
     .then((data) => {
       console.log(data)
@@ -47,33 +48,30 @@ const App = () => {
       return _link.link.includes(search.toLowerCase());
     });
   }
+  // return <>
+  // <h1>The Great Linkerator</h1>
+  // <Switch>
+  //   <Route path="/searchBar" render={()=> <SearchBar />} />
+  //   <Route path="/createLink" render={()=><CreateLinkForm linkList={linkList} setLinkList={setLinkList} addNewLink={addNewLink} history={history}/>}/>
+  //   <Redirect from="*" to="/"  />
+  // </Switch>
 
-  
-  return <>
-  <h1>The Great Linkerator</h1>
-  <Switch>
-    <Route path="/searchBar" render={()=> <SearchBar />} />
-    <Route path="/createLink" render={()=><CreateLinkForm linkList={linkList} setLinkList={setLinkList} addNewLink={addNewLink} history={history}/>}/>
-    <Redirect from="*" to="/"  />
+  // </>
+
+  return <Switch>
+    <Route path='/'>
+      <h1>The Great Linkerator</h1>
+      <SearchBar 
+        search={search}
+        setSearch={setSearch}
+        setSearchOption={setSearchOption}
+        searchOption={searchOption}/>
+      <LinkTable
+        linkList={filteredLinks()}
+        setSearch={setSearch}/>
+    </Route>
   </Switch>
-
-  </>
-
-  
-
-
-//   return <Switch>
-//     <Route path='/'>
-//       <h1>The Great Linkerator</h1>
-//       <SearchBar 
-//         search={search}
-//         setSearch={setSearch}
-//         setSearchOption={setSearchOption}
-//         searchOption={searchOption}/>
-         //  <LinkTable />
-//     </Route>
-//   </Switch>
-// };
+};
 
 
 ReactDOM.render(
